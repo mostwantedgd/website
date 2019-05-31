@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!--
+			Author: Nicholas Flowers
+			Date: 1/16/18
+		-->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>MWGD | Games</title>
+		<link rel="stylesheet" href="mwgdStylesheet.css" />
+		<script src="modernizr.custom.05819.js"></script>
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	</head>
+	
+	<body id="page_ourGames">
+		<div class="pageWrapper">
+			<header>
+				<h1 class="structureHead">MostWanted GD Home Page</h1>	
+				<h2 class="structureHead">MWGD Navigation</h2>				
+				<nav id="menu-primary">
+					<a id="logo" href="index.html">				
+						<img id="logoNormal" alt="mwgd logo" src="images/main/MWGDLogoFull.png"/>	
+						<img id="logoInvert" alt="mwgd logo" src="images/main/MWGDLogoFull_Invert.png"/>
+					</a>
+					<ul id="menu-items">					
+						<li>
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="news.html">News</a>
+						</li>
+						<li id="li-nav-current">
+							<a href="games.html">Our Games</a>
+						</li>
+						<li>
+							<a href="about.html">About Us</a>
+						</li>
+						<li>
+							<a href="contact.html">contact</a>
+						</li>
+					</ul>					
+					<button id="dropdownMenu">Menu</button>
+				</nav>					
+			</header>
+			<div id="popupWrapper">
+				<button id="closeView">X</button>
+				<iframe id="faderContent"></iframe>
+				<div id="fader"></div>
+			</div>				
+			<main>					
+				<form id="birthDateCheck">
+					<div id="yearsInput">
+						<span>Enter your age</span>							
+						<div id="inputLine">
+							<button type="button" id="age-minus">-</button>
+							<input type="number" size="2" min="1" max="99" value="1" id="input-age"/>
+							<button type="button" id="age-plus">+</button>
+						</div>
+						<button type="button" id="age-confirm">Enter</button>
+					</div>
+				</form>
+				<div id="birthdayResponse"></div>
+				<div id="gamesWindow" style="display:none;"> <!--Inline style used to prevent this from showing before the age check-->
+					<section class="home-list">
+						<div class="game-mature" style="display:none;"><button class="home-item" id="games/pages/template.html"><div class="imageTint"></div><img src="games/current/cogsAndCowboysHome.jpg" alt="Game Image"/><h4><span>Cogs and Cowboys</span></h4><span class="home-item-platform"><span class="home-item-title">Cogs and Cowboys</span> - SteamVR/HTC Vive</span></button></div>
+						<button class="home-item" name="btw.html"><div class="imageTint"></div><img src="games/current/busterTheWizard.jpg" alt="Game Image"/><h4><span>Buster the Wizard</span></h4><span class="home-item-platform"><span class="home-item-title">Buster the Wizard</span> - Nintendo Switch</span></button>
+					</section>
+				</div>
+			</main>
+		</div>
+		<footer>
+			<p>Useful Links</p>
+			<ul id="footer-linkList">
+				<li><a href="privacy.html">Privacy + Internet Safety tips</a></li>
+				<li>|</li>
+				<li><a href="datecalc.html">Membership Calculator</a></li>
+			</ul>
+			<p>Copyright 2018 MostWanted Game Development (TM)</p>
+		</footer>	
+		
+		<script src="mwgdScript.js"></script>
+		<script src="pageScripts/gamesPage.js"></script>
+		
+	</body>
+</html>

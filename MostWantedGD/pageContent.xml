@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<newsPosts>
+  <newsPost>
+    <headline>Welcome to MostWantedGD&#x2122;</headline>
+    <subheading>You're in a pretty cool place. Take a look around. Have a seat and take a load off.</subheading>
+    <content>Welcome. We are MWGD.</content>
+	<mainImage>newsPosts/current/newsPost2.jpg</mainImage>
+	<mainColor>rgb(255,255,255)</mainColor>
+	<secondaryColor>rgb(255,255,255)</secondaryColor>
+  </newsPost>
+  <newsPost>
+	<headline>Cogs and Cowboys&#x2122; Update Soon!</headline>
+    <subheading>Burn kills, skill menu, new loot system, and more!</subheading>
+    <content>Welcome. We are MWGD.</content>
+	<mainImage>newsPosts/current/newsPost3.jpg</mainImage>
+	<mainColor>rgb(49,36,23)</mainColor>
+	<secondaryColor>rgb(255,177,0)</secondaryColor>
+  </newsPost>
+  <newsPost>
+    <headline>Buster the Wizard&#x2122;</headline>
+    <subheading>Nintendo Switch. Dogs with magic powers. Awesome with a bit of amazing.</subheading>
+    <content>Welcome. We are MWGD.</content>
+	<mainImage>newsPosts/current/newsPost1.jpg</mainImage>
+	<mainColor>rgb(25,32,34)</mainColor>
+	<secondaryColor>rgb(55,170,199)</secondaryColor>
+  </newsPost>  
+</newsPosts>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!--
+			Author: Nicholas Flowers
+			Date: 1/16/18
+		-->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>MWGD | WebSecurity</title>
+		<link rel="stylesheet" href="mwgdStylesheet.css" />
+		<script src="modernizr.custom.05819.js"></script>
+	</head>
+	
+	<body id="page_about">
+		<div class="pageWrapper">
+			<header>
+				<h1 class="structureHead">MostWanted GD Home Page</h1>	
+				<h2 class="structureHead">MWGD Navigation</h2>				
+				<nav id="menu-primary">
+					<a id="logo" href="index.html">				
+						<img id="logoNormal" alt="mwgd logo" src="images/main/MWGDLogoFull.png"/>	
+						<img id="logoInvert" alt="mwgd logo" src="images/main/MWGDLogoFull_Invert.png"/>
+					</a>
+					<ul id="menu-items">					
+						<li>
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="news.html">News</a>
+						</li>
+						<li>
+							<a href="games.html">Our Games</a>
+						</li>
+						<li>
+							<a href="about.html">About Us</a>
+						</li>
+						<li>
+							<a href="contact.html">contact</a>
+						</li>
+					</ul>					
+					<button id="dropdownMenu">Menu</button>
+				</nav>					
+			</header>
+			<main>
+				<div id="warpa" style="width:50%; margin:10px auto 0 auto;padding:20px;background-color:white;">
+					<h1 style="font-size:3em;">Web Security</h1>
+					<span>This information is currently available to every site you visit.</span>
+					<p></p>
+					<p></p>
+					<p></p>
+					<p></p>				
+					<p></p>
+					<p></p>
+					
+					<!--Map-->
+					<div id="map" style="width:700px; height:500px; background-color:gray"></div>
+					
+					<!--Sorry for all these line breaks instead of using CSS.......-->
+					<br>
+					<br>
+					<span>Here are some suggestions for your web security</span>
+					<br>
+					<ol>
+						<li>		
+							<a href="https://www.webroot.com/us/en/home/resources/articles/pc-security/online-activities-internet-security">https://www.webroot.com/us/en/home/resources/articles/pc-security/online-activities-internet-security</a>
+							<p>Be conscious of where you are going and what you are clicking on, it could be a trap.</p>
+							<br>
+						</li>
+						<li>
+							<a href="http://time.com/money/4935799/online-privacy-security/">http://time.com/money/4935799/online-privacy-security/</a>
+							<p>Secure your information (sharing settings, passwords, etc.).</p>
+							<br>
+						<li>
+						<li>
+							<a href="https://thebestvpn.com/safe-internet-browsing/">https://thebestvpn.com/safe-internet-browsing/</a>
+							<p>Use a secure browser, secure your settings (passwords), only visit HTTPS sites and not HTTP.</p>
+							<br>
+						</li>
+					</ol>
+				</div>
+			</main>
+		</div>
+		<footer>
+			<p>Useful Links</p>
+			<ul id="footer-linkList">
+				<li><a href="privacy.html">Privacy + Internet Safety tips</a></li>
+				<li>|</li>
+				<li><a href="datecalc.html">Membership Calculator</a></li>
+			</ul>
+			<p>Copyright 2018 MostWanted Game Development (TM)</p>
+		</footer>	
+				
+		<script>
+			// Google Maps - Show user position on map
+			
+			// named timeout that can be canceled
+			var waitForUser;
+			
+			// test that geolocation can be used 
+			function geoTest() {
+				// Timeout, if the user doesn't allow location after 10 seconds it will fail
+				waitForUser = setTimeout(fail, 10000);
+				// Test the geolocation
+				if(navigator.geolocation){
+					navigator.geolocation.getCurrentPosition(createDirections, fail, {timeout: 10000});
+				} else {
+					// Geolocation failed
+					fail();
+				}
+			}
+			
+			function createDirections(position) {
+				// Updates text of position
+				showPosition(position);
+				// clear the timeout because it succeeded
+				clearTimeout(waitForUser);
+				// console.log("Longitude: " + position.coords.longitude);
+				// console.log("Latitude: " + position.coords.latitude);
+				
+				// Save the lat and lng to variables
+				var currPosLat = position.coords.latitude;
+				var currPosLng = position.coords.longitude;
+				// map options
+				var mapOptions = {
+					center: new google.maps.LatLng(currPosLat, currPosLng),
+					zoom: 12
+				};
+				var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+			}
+			
+			// goelocation failed
+			function fail(){
+				// console.log("Geolocation information not available or not authorized.");
+				document.getElementById("map").innerHTML = "Unable to access your current location.";
+			}	
+				
+		</script>
+		<!--Google Maps API-->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDam8txSWDO_R_viZ96dl4cka190I9kroQ&callback=geoTest" async defer></script>
+		
+		<!--Privacy page code-->
+		<script>
+			document.getElementsByTagName("p")[0].innerHTML = "Web browser name: " + navigator.appName;
+			document.getElementsByTagName("p")[1].innerHTML = "Web browser version: " + navigator.appVersion;
+			document.getElementsByTagName("p")[2].innerHTML = "Operating platform: " + navigator.platform;
+			document.getElementsByTagName("p")[3].innerHTML = "User Agent: " + navigator.userAgent;
+			// navigator.geolocation.getCurrentPosition(showPosition);
+			document.getElementsByTagName("p")[5].innerHTML = "Online: " + navigator.onLine;
+			function showPosition(position){
+				document.getElementsByTagName("p")[4].innerHTML = "<p>Geolocation: <br>&nbsp;&nbsp;Latitude: " + position.coords.latitude + "<br>&nbsp;&nbsp;Longitude: " + position.coords.longitude + "<br>&nbsp;&nbsp;Altitude:" + position.coords.altitude + "</p>";
+			}
+		</script>	
+		
+		<script src="mwgdScript.js"></script>
+		
+	</body>
+</html>

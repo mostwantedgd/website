@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!--
+			Author: Nicholas Flowers
+			Date: 4/18/18
+		-->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>MWGD | Home</title>
+		<link rel="stylesheet" href="mwgdStylesheet.css" />
+		<script src="modernizr.custom.05819.js"></script>
+		<script src="modernizr.custom.65897.js"></script>
+		
+		<!--Uncomment to use Js to Google Sheets code for emails. Currently using HubSpot 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		-->
+	</head>
+	
+	<body id="page_home">
+		<div class="pageWrapper">
+			<header>
+				<h1 class="structureHead">MostWanted GD Home Page</h1>	
+				<h2 class="structureHead">MWGD Navigation</h2>				
+				<nav id="menu-primary">
+					<a id="logo" href="index.html">				
+						<img id="logoNormal" alt="mwgd logo" src="images/main/MWGDLogoFull.png"/>	
+						<img id="logoInvert" alt="mwgd logo" src="images/main/MWGDLogoFull_Invert.png"/>
+					</a>
+					<ul id="menu-items">					
+						<li  id="li-nav-current">
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="news.html">News</a>
+						</li>
+						<li>
+							<a href="games.html">Our Games</a>
+						</li>
+						<li>
+							<a href="about.html">About</a>
+						</li>
+						<li>
+							<a href="contact.html">contact</a>
+						</li>
+					</ul>					
+					<button id="dropdownMenu">Menu</button>
+				</nav>					
+			</header>		
+			<main>
+				<div id="popupWrapper">
+					<button id="closeView">X</button>
+					<iframe id="faderContent"></iframe>
+					<div id="fader"></div>
+				</div>				
+				
+				<div id="mainImage-slideshow">	
+					<a class="mainImgPrev" onclick="homeSlideDown()">&#10094;</a>
+					<a class="mainImgNext" onclick="homeSlideUp()">&#10095;</a>	
+					<div id="mainImagesContainer">						
+						<div id="mainImageSlide">							
+							<div id="imgFaderOver"><img id="mainNewsImageFader" src="Images/Main/newsDefault.jpg" alt="Splash Image"/></div>
+							<img id="mainNewsImage" alt="Splash Image" src="Images/Main/newsDefault.jpg"/>							
+						</div>												
+					</div>					
+					<div id="imgTextBG">
+						<a id="imgTextContainer" href="news.html">							
+							<div id="imgText">News Post 1</div>
+							<div id="imgNumberText"></div>
+							<div id="imgTextSub">Some news right here!</div>							
+						</a>
+						<div id="imgProgressDots">
+						  <span class="dot" onclick="currentSlide(0)"></span>
+						  <span class="dot" onclick="currentSlide(1)"></span>
+						  <span class="dot" onclick="currentSlide(2)"></span>
+						</div>	
+						<div id="imgProgressBar"><div id="ipb_fill"></div></div>	
+					</div>								
+				</div>
+				<section class="pageSection">
+					<div class="sectionHeader">
+						<h3>Active Projects</h3>
+					
+					</div>
+					<!--
+					<div class="pageSpacer"><h2>Active Projects</h2></div>
+					<div class="smallSpacer"></div>
+					-->
+					<section class="home-list">
+						<button class="home-item" id="https://store.steampowered.com/app/510410/Cogs_and_Cowboys/"><div class="imageTint"></div><img src="games/capsule_images/cogsAndCowboysHome.jpg" alt="Game Image"/><h4><span>Cogs and Cowboys</span></h4><span class="home-item-platform"><span class="home-item-title">Cogs and Cowboys</span> - SteamVR/HTC Vive</span></button>
+						<button class="home-item" id="Games/pages/template.html"><div class="imageTint"></div><img src="games/capsule_images/busterTheWizard.jpg" alt="Game Image"/><h4><span>Buster the Wizard</h4><span class="home-item-platform"><span class="home-item-title">Buster the Wizard</span> - Nintendo Switch</span></button>
+					</section>
+				</section>
+				<section class="pageSection">
+					<div class="sectionHeader">
+						<h3>Released Titles</h3>
+					</div>
+					<!--
+					<div class="pageSpacer"><h2>Released Titles</h2></div>
+					<div class="smallSpacer"></div>
+					-->				
+					<section class="home-list">
+						<button class="home-item" id="Games/pages/template.html"><div class="imageTint"></div><img src="games/capsule_images/vortaSprinter.jpg" alt="Vorta Sprinter Game Image"/><h4><span>Vorta Sprinter</span></h4><span class="home-item-platform"><span class="home-item-title">Vorta Sprinter</span> - Android/Google Play</span></button>
+						<button class="home-item" id="Games/pages/template.html"><div class="imageTint"></div><img src="games/capsule_images/tableFlippingSimulator.jpg" alt="TFS Game Image"/><h4><span>Table Flipping Simulator</span></h4><span class="home-item-platform"><span class="home-item-title">Table Flipping Simulator</span> - Android/Google Play</span></button>
+						<button class="home-item" id="Games/pages/template.html"><div class="imageTint"></div><img src="games/capsule_images/battlelines.jpg" alt="Battlelines Game Image"/><h4><span>Battlelines: WW2 Arcade</span></h4><span class="home-item-platform"><span class="home-item-title">Battlelines: WW2 Arcade</span> - Android/Google Play</span></button>
+						<button class="home-item" id="Games/pages/template.html"><div class="imageTint"></div><img src="games/capsule_images/exiled.jpg" alt="Exiled Game Image"/><h4><span>Exiled</span></h4><span class="home-item-platform"><span class="home-item-title">Exiled</span> - Android/Google Play</span></button>
+						<button class="home-item" id="Games/pages/template.html"><div class="imageTint"></div><img src="games/capsule_images/tinySub.jpg" alt="Tiny Sub Game Image"/><h4><span>Tiny Sub</span></h4><span class="home-item-platform"><span class="home-item-title">Tiny Sub</span> - Android/Google Play</span></button>
+						<button class="home-item" id="Games/pages/template.html"><div class="imageTint"></div><img src="games/capsule_images/solarForge.jpg" alt="Solar Forge Game Image"/><h4><span>Solar Forge</span></h4><span class="home-item-platform"><span class="home-item-title">Solar Forge</span> - Android/Google Play</span></button>
+					</section>
+				</section>
+			</main>
+		</div>			
+		<footer>
+			<p>Useful Links</p>
+			<ul id="footer-linkList">
+				<li><a href="privacy.html">Privacy + Internet Safety tips</a></li>
+				<li>|</li>
+				<li><a href="datecalc.html">Membership Calculator</a></li>
+			</ul>
+			<p>Copyright 2018 MostWanted Game Development (TM)</p>
+		</footer>		
+		<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>		
+		<script src="mwgdScript.js"></script>
+		<!-- Start of HubSpot Embed Code -->
+		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5818865.js"></script>
+		<!-- End of HubSpot Embed Code -->
+	</body>
+</html>
