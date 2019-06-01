@@ -38,6 +38,12 @@ $(function() {
 });
 //}
 
+//{ Load Footer
+$(function() {
+    $("#footerContent").load("footerContent.html");
+});
+//}
+
 //{Home Slideshow
 
 (function (){

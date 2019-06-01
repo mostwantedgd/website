@@ -460,6 +460,7 @@ main{
 
 /****************Contact Us Page*****************/
 #cu_h1{
+	padding-top:1em;
 	font-size: 3em;
 	text-align:center;
 }
@@ -472,10 +473,13 @@ main{
 }
 #cu_wrapper{
 	display:block;
-	width:1000px;
-	padding: 100px;
 	margin: 20px auto;
-	border: 1px solid gray;
+	max-width:500px;
+}
+#cu_wrapper p{
+	width:90%;
+	margin: auto;
+	display:block;
 }
 #cu_form ul li{
 	padding: 10px;
