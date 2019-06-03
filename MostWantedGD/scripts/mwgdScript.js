@@ -20,7 +20,7 @@ var mobileMenuOpen = false;
 //{ Load Nav
 $(function() {
 
-    $("#nav").load("navMenu.html");
+    $("#nav").load("constantPages/navMenu.html");
 
     function activeNav() {
         var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
@@ -40,14 +40,14 @@ $(function() {
 
 //{ Load Footer
 $(function() {
-    $("#footerContent").load("footerContent.html");
+    $("#footerContent").load("constantPages/footerContent.html");
 });
 //}
 
 //{Home Slideshow
 
 (function (){
-	if(document.getElementById("page_home")){
+	if(document.getElementById("mainImage-slideshow")){
 		var xmlhttp;
 		if (window.XMLHttpRequest) {
 			xmlhttp = new XMLHttpRequest();
@@ -60,7 +60,7 @@ $(function() {
 				loadXMLContent(xmlhttp);
 			}
 		};
-		xmlhttp.open("GET", "pageContent.xml", true);
+		xmlhttp.open("GET", "xml/newsPosts.xml", true);
 		xmlhttp.send();
 	}
 })()
@@ -105,6 +105,7 @@ function loadXMLContent(xml){
 	homeProgressTimer = setInterval(progressBar, progressBarInterval);
 }
 
+// Progress bar showing time until next slideshow content
 function progressBar(){
 	progressBarFill += (progressBarInterval / homeSlideInterval);
 	document.getElementById("ipb_fill").style.width = (progressBarFill * 100) + "%"; 
@@ -113,9 +114,8 @@ function progressBar(){
 	}
 }
 
+// Forces slideshow to the next slide
 function homeSlideUp(){
-	imgOpacity = .8;
-	fadeOut = setInterval(fadeImageOut, 50);
 	currentHomeSlide++;
 	clearInterval(homeSlideTimer);
 	clearInterval(homeProgressTimer);
@@ -124,9 +124,8 @@ function homeSlideUp(){
 	showHomeSlide();
 }
 
-function homeSlideDown(){
-	imgOpacity = .8;
-	fadeOut = setInterval(fadeImageOut, 50);
+// Forces slideshow to the previous slide
+function homeSlideDown(){	
 	currentHomeSlide--;
 	clearInterval(homeSlideTimer);
 	clearInterval(homeProgressTimer);
@@ -136,82 +135,68 @@ function homeSlideDown(){
 }
 
 function currentSlide(n){
-	fadeOut = setInterval(fadeImageOut, 50);
 	clearInterval(homeSlideTimer);
 	clearInterval(homeProgressTimer);
+	homeSlideTimer = setInterval(homeSlideUp, homeSlideInterval);
+	homeProgressTimer = setInterval(progressBar, progressBarInterval);
 	currentHomeSlide = n;
 	showHomeSlide();
 }
 
-var imgOpacity = 1.0;
-var fadeOut;
-
+// Slideshow of news images, content, and colors loaded from XML document
 function showHomeSlide(){
+	var imageFader = $("#mainNewsImageFader");
 	progressBarFill = 0;
-	var homeSlide = document.getElementById("mainImageSlide");
+	var homeSlide = $("#mainImageSlide");
 	if(currentHomeSlide > newsPostHeadlines.length - 1){
 		currentHomeSlide = 0;
 	}
 	if(currentHomeSlide < 0){
 		currentHomeSlide = newsPostHeadlines.length - 1;
 	}
-	document.getElementById("mainNewsImage").src = newsPostMainImages[currentHomeSlide];	
-	document.getElementById("mainImage-slideshow").style.backgroundColor = newsPostColors[currentHomeSlide];
-	document.getElementById("imgNumberText").innerHTML = (currentHomeSlide + 1) + "/" + newsPostHeadlines.length;	
-	document.getElementById("imgText").innerHTML = newsPostHeadlines[currentHomeSlide];
-	document.getElementById("imgTextSub").innerHTML = newsPostSubHeadings[currentHomeSlide];
+	imageFader.stop();
+	imageFader.css({"display":"block","opacity":"100"});
+	$("#mainNewsImage").attr("src", newsPostMainImages[currentHomeSlide]);	
+	$("#mainImage-slideshow").css({"backgroundColor": newsPostColors[currentHomeSlide], "transition":".3s"});
+	$("#imgNumberText").html((currentHomeSlide + 1) + "/" + newsPostHeadlines.length);	
+	$("#imgText").html(newsPostHeadlines[currentHomeSlide]);
+	$("#imgTextSub").html(newsPostSubHeadings[currentHomeSlide]);
 	for(var i = 0; i < dots.length; i++){
 		dots[i].className = "dot";
 	}
 	dots[currentHomeSlide].className += " dotActive";
-	// faderTimer = setTimeout(setFaderImage, 1000);
-}
-
-function fadeImageOut(){	
-	document.getElementById("mainNewsImageFader").style.opacity = imgOpacity;
-	imgOpacity -= .12;
-	if(imgOpacity <= 0){
-		clearInterval(fadeOut);
-		imgOpacity = .8;
-		document.getElementById("mainNewsImageFader").style.opacity = .8;
-		document.getElementById("mainNewsImageFader").src = newsPostMainImages[currentHomeSlide];
-	}
+	imageFader.fadeOut(300,(function(){
+		imageFader.attr("src",newsPostMainImages[currentHomeSlide]);
+	}));
 }
 
 //}
 
 //{Pop up window
+var popupLoaded = false;
+// Called by buttons to open a window. The button's ID is the their target path for the window
 function openGamePopupFromButton(clickedButton){
 	// button ids are paths to their respective html files
 	openGamePopup(clickedButton.id);
 }
+
+// Opens a popup window given a path
 function openGamePopup(buttonTarget)
 {	
-	var pageToOpen = buttonTarget;
-	/* ORIGINAL CODE
-	var wrapper = document.getElementById("popupWrapper");
-	var fader = document.getElementById("fader");
-	var content = document.getElementById("faderContent");
-	var closeButton = document.getElementById("closeView");
-	if(content.style.top != "15%"){
-		closeButton.style.top = "-100%";
-		content.style.top = "-100%";
-		setTimeout(function(){
-			fader.style.opacity = ".7";
-			content.style.top = "15%";
-			closeButton.style.top = "13%";
-		},10);
-		wrapper.style.display = "block";	
-		content.src = pageToOpen;
+	if(!popupLoaded){
+		// Insert Popup markup into page
+		$("main").prepend("<div id='popupWrapper'><button id='popupCloseView'>X</button><iframe id='popupContent'></iframe><div id='popupBackground'></div></div>");
+		// popup window
+		eventListener(document.getElementById("popupWrapper"),"click",closePopupWindow);
+		popupLoaded = true;	
 	}
-	*/
-	
-	// JQUERY CODE
+	var pageToOpen = buttonTarget;
 	// creating jquery objects
 	var wrapper = $("#popupWrapper");
-	var fader = $("#fader");
-	var content = $("#faderContent");
-	var closeButton = $("#closeView");
+	var fader = $("#popupFader");
+	var content = $("#popupFaderContent");
+	var closeButton = $("#popupCloseView");
+	/*
 	// check to see if the window is hidden off screen
 	if(content.css("top") != "15%"){
 		// Reset the offscreen positions for the css transition
@@ -228,26 +213,28 @@ function openGamePopup(buttonTarget)
 		// load the html page in the popup iframe based on the
 		// id of the button that was clicked
 		// (button ids are paths to their respective html files)
-		content.attr("src",pageToOpen);
-	}
+				
+	}*/
+	content.slideDown("slow");
+	content.attr("src",pageToOpen);
 }
 
 function closePopupWindow() {
-	var wrapper = document.getElementById("popupWrapper");
-	var fader = document.getElementById("fader");
-	var content = document.getElementById("faderContent");
-	var closeButton = document.getElementById("closeView");
-	if(content.style.top != "-100%"){
-		content.style.top = "15%";
-		closeButton.style.top = "13%";
+	var popupWrapper = $("popupWrapper");
+	var popupFader = $("popupBackground");
+	var popupContent = $("popupContent");
+	var popupCloseButton = $("popupCloseView");
+	if(popupContent.css("top") != "-100%"){
+		popupContent.css("top","15%");
+		popupCloseButton.css("top","13%");
 		setTimeout(function(){
-			fader.style.opacity = "0";
-			content.style.top = "-100%";
-			closeButton.style.top = "-100%";
+			popupFader.css("opacity", "0");
+			popupContent.css("top","-100%");
+			popupCloseButton.css("top","-100%");
 		},10);
 		setTimeout(function(){
-			wrapper.style.display = "none";	
-			content.src="";
+			popupWrapper.css("display", "none");	
+			popupContent.attr("src","");
 		},200);
 	}
 }
@@ -289,9 +276,9 @@ function checkMobileMenu(){
 
 // Page Load
 // Things to do when the page loads
-function pageStart(){
-	createEventListeners();
+function pageStart(){	
 	
+	/* Welcome popup Currently disabled because of HubSpot popup
 	// check if this is a new user
 	if (!sessionStorage.getItem('returnUser')){
 		// they are new, so set session storage so they are treated as returning
@@ -299,6 +286,7 @@ function pageStart(){
 		// since they are new, show them a popup		
 		setTimeout(function() {openGamePopup("games/pages/template.html");}, 5000);
 	}
+	*/
 	
 	// make all text inputs IE8 compatible
 	if (document.querySelectorAll("input[type=text]")) {
@@ -314,6 +302,7 @@ function pageStart(){
 			generatePlaceholder(textAreas[i]);
 		}
 	}
+	createEventListeners();
 }
 
 // Create listeners, called from pageStart()
@@ -324,11 +313,6 @@ function createEventListeners(){
 		for (var i = 0; i < gameButtons.length; i++){
 			eventListener(gameButtons[i],"click",function(){openGamePopupFromButton(this);});
 		}
-	}
-	
-	// popup window
-	if (document.getElementById("popupWrapper")) {
-		eventListener(document.getElementById("popupWrapper"),"click",closePopupWindow);
 	}
 }
 

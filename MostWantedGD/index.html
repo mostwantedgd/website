@@ -8,9 +8,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<title>MWGD | Home</title>
-		<link rel="stylesheet" href="mwgdStylesheet.css" />
-		<script src="modernizr.custom.05819.js"></script>
-		<script src="modernizr.custom.65897.js"></script>
+		<link rel="stylesheet" href="css/mwgdStylesheet.css" />
+		<script src="scripts/modernizr.custom.05819.js"></script>
+		<script src="scripts/modernizr.custom.65897.js"></script>
 	</head>
 	
 	<body id="page_home">
@@ -20,13 +20,7 @@
 				<h2 class="structureHead">MWGD Navigation</h2>	
 				<div id="nav"></div>	
 			</header>			
-			<main>
-				<div id="popupWrapper">
-					<button id="closeView">X</button>
-					<iframe id="faderContent"></iframe>
-					<div id="fader"></div>
-				</div>				
-				
+			<main>	
 				<div id="mainImage-slideshow">	
 					<a class="mainImgPrev" onclick="homeSlideDown()">&#10094;</a>
 					<a class="mainImgNext" onclick="homeSlideUp()">&#10095;</a>	
@@ -59,8 +53,8 @@
 					<div class="pageSpacer"><h2>Active Projects</h2></div>
 					<div class="smallSpacer"></div>
 					-->
-					<section class="home-list">
-						<button class="home-item" id="https://store.steampowered.com/app/510410/Cogs_and_Cowboys/"><div class="imageTint"></div><img src="games/capsule_images/cogsAndCowboysHome.jpg" alt="Game Image"/><h4><span>Cogs and Cowboys</span></h4><span class="home-item-platform"><span class="home-item-title">Cogs and Cowboys</span> - SteamVR/HTC Vive</span></button>
+					<section class="home-list">						
+						<a class="home-item" href="Games/pages/cogsAndCowboys.html"><div class="imageTint"></div><img src="games/capsule_images/cogsAndCowboysHome.jpg" alt="Game Image"/><h4><span>Cogs and Cowboys</span></h4><span class="home-item-platform"><span class="home-item-title">Cogs and Cowboys</span> - SteamVR/HTC Vive</span></a>
 						<button class="home-item" id="Games/pages/template.html"><div class="imageTint"></div><img src="games/capsule_images/busterTheWizard.jpg" alt="Game Image"/><h4><span>Buster the Wizard</h4><span class="home-item-platform"><span class="home-item-title">Buster the Wizard</span> - Nintendo Switch</span></button>
 					</section>
 				</section>
@@ -90,7 +84,7 @@
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>		
-		<script src="mwgdScript.js"></script>
+		<script src="scripts/mwgdScript.js"></script>
 		<!-- Start of HubSpot Embed Code -->
 		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5818865.js"></script>
 		<!-- End of HubSpot Embed Code -->
