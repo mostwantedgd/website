@@ -37,7 +37,7 @@ header{
 	position:fixed;
 	width:100%;
 	top:0;
-	z-index:5;
+	z-index:50;
 }
 #logo{	
 	position:absolute;
@@ -55,11 +55,11 @@ header{
 #logoInvert {
 	opacity: 0;
 	transition:.5s;
-	z-index:10;
+	z-index:49;
 }
 #logoNormal {
 	opacity: 1;
-	z-index:9;
+	z-index:48;
 }
 #logo:hover #logoInvert {
 	background-color:#333333;
@@ -160,6 +160,7 @@ main{
 	right:0;
 	width:100%;
 	min-height:100%;
+	z-index:46;
 }
 #popupBackground {
 	position:absolute;
@@ -169,45 +170,43 @@ main{
 	width:100%;
 	min-height:100%;
 	background-color:black;
-	opacity:0;
-	z-index:1000;
+	opacity:.7;
+	z-index:46;
 }
 #popupContent {
 	position:fixed;
 	transition:.2s;
-	top:-100%;
 	width:70%;
-	height:70%;
 	left:15%;
 	right:15%;
-	height:70vh;
-	border:.2vw solid white;
-	border-radius:1vw;	
+	top:7%;
+	height:86%;
+	border-radius:1em;	
 	display:block;
 	margin:auto;
-	z-index:2000;
+	z-index:47;
 }
 #popupBody {
 	background: radial-gradient(#333333, #111111);
 	display:block;
 }
 #popupCloseView {
-	border-radius:.5vw;
-	padding:.5vw 1vw;
+	border-radius:.2em;
+	padding:0em .25em;
 	position:fixed;
-	top:13%;
-	right:13vw;
+	top:7.05%;
+	right:14.75%;
 	font-size:3em;
 	font-weight:bold;
-	color:white;
-	background-color:black;
-	border:4px solid white;
-	z-index:3000;
-}
-#poupCloseView:hover {
-	background-color:white;
-	border:4px solid black;
 	color:black;
+	background-color:#7777777;
+	border:4px solid black;
+	z-index:49;
+}
+#popupCloseView:hover {
+	background-color:#333333;
+	border:4px solid black;
+	color:white;
 }
 .smallSpacer{
 	display:block;
@@ -253,7 +252,7 @@ main{
 }
 /****************Home Page*****************/
 /*Slide Show*/
-#slideshow{
+#mainImage-slideshow{
 	width:100%;
 	margin:auto;
 	margin:0 auto 0 auto;
@@ -308,6 +307,7 @@ main{
 	font:bold;
 	font-size: 2em;
 	padding-top:10px;
+	opacity:0;
 }
 #imgTextSub{
 	width:100%;
@@ -316,6 +316,7 @@ main{
 	font-size: 1.2em;
 	padding-top:5px;
 	min-height:50px;
+	opacity:0;
 }
 #imgProgressBar{
 	height:5px;
@@ -385,15 +386,15 @@ main{
 	margin:auto;
 }
 
-/*Block Image/link lists*/
-.home-list{
+/*Block image lists*/
+.block-list{
 	width: 70%;
 	display:block;
 	margin:auto;
 	text-align:center;
 	transition:.3s;
 }
-.home-item{
+.block-item{
 	background-color:#000000;
 	display:inline-block;
 	width:400px;
@@ -404,7 +405,7 @@ main{
 	border:none;
 	transition:.3s;
 }
-.home-item h4{
+.block-item .block-item-title-main{
 	color:white;
 	font-weight:bold;
 	font-size:2.5em;
@@ -412,10 +413,10 @@ main{
 	opacity:0;
 	transition: .3s;
 }
-.home-item:hover h4 {
+.block-item:hover .block-item-title-main {
 	opacity:1;
 }
-.home-item h4 span {
+.block-item .block-item-title-main {
 	color:white;
 	font:bold;
 	position:absolute;
@@ -423,10 +424,10 @@ main{
 	top:50%;
 	transform:translate(-50%,-50%);
 }
-.home-item h5{
+.block-item h5{
 	color:white;
 }
-.home-item-platform{
+.block-item-platform{
 	width:96%;
 	color:white;
 	font:bold;
@@ -441,23 +442,23 @@ main{
 	transition:.2s;
 	opacity:1;
 }
-.home-item-title {
+.block-item-title {
 	font-weight:bold;
 }
-.home-item:hover .home-item-platform {
+.block-item:hover .block-item-platform {
 	opacity:0;
 	bottom:-5%;
 }
-.home-item h4 span.spacer{
+.block-item h4 span.spacer{
 	padding: 0 10px;
 }
-.home-item img {
+.block-item img {
 	opacity:1;
 	width:100%;
 	height:100%;
 	transition: .3s;
 }
-.home-item:hover img{
+.block-item:hover img{
 	opacity:.3;
 }
 
@@ -606,12 +607,20 @@ main{
 	#menu-items li a{
 		padding: .4em .5em .4em .5em;
 	}
-	.home-list {
+	.block-list {
 		width:100%;
 	}
 }
 /*Phone screen*/
 @media screen and (max-width: 700px) {
+	#popupContent{
+		width:96%;
+		left:2%;
+		right:2%;
+	}
+	#popupCloseView{
+		right:1%;
+	}
 	#mainImage-slideshow {
 		min-height:60vw;
 		margin-bottom:30vw;
@@ -640,10 +649,10 @@ main{
 	#imgTextSub {
 		display:none;
 	}
-	.home-list {
+	.block-list {
 		width:100%;
 	}
-	.home-item {
+	.block-item {
 		width:300px;
 		height:200px;
 	}
@@ -668,16 +677,22 @@ main{
 		border-radius:1vw;
 	}
 	#menu-items {
-		margin-top:2em;
-		border-top:.5em solid gray;
+		position:absolute;
+		top:3em;
+		border-top:.2em solid gray;
+		border-bottom:.2em solid gray;
 		background-color:#333333;
 		display:none;
+		width:100%;
+		height:100vh;
 	}
 	#menu-items li{
+		position:relative;
 		display:block;
-		margin:0;
+		margin:auto;
 		transition:.2s;
-		margin-right:10vw;
+		right:7%;
+		
 	}
 	#menu-items li a{
 		padding: 1.25em 1.5em 1.25em 1.5em;

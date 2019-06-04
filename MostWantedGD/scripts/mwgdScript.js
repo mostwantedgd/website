@@ -44,27 +44,6 @@ $(function() {
 });
 //}
 
-//{Home Slideshow
-
-(function (){
-	if(document.getElementById("mainImage-slideshow")){
-		var xmlhttp;
-		if (window.XMLHttpRequest) {
-			xmlhttp = new XMLHttpRequest();
-		} else {
-			// code for older browsers
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				loadXMLContent(xmlhttp);
-			}
-		};
-		xmlhttp.open("GET", "xml/newsPosts.xml", true);
-		xmlhttp.send();
-	}
-})()
-
 // Home page slideshow
 var currentHomeSlide = 0;
 var homeSlideInterval = 5000;
@@ -79,30 +58,32 @@ var homeSlideTimer;
 var progressTimer;
 var dots;
 
-function loadXMLContent(xml){
-	
-	var response = xml.responseXML;
-	dots = document.getElementsByClassName("dot");
-	for(var i = 0; i < response.getElementsByTagName("newsPost").length; i++){
-		var nPH = response.getElementsByTagName("headline");
-		var nPSH = response.getElementsByTagName("subheading");
-		var nPMI = response.getElementsByTagName("mainImage");
-		var nPC = response.getElementsByTagName("mainColor");
-		var nPSC = response.getElementsByTagName("secondaryColor");
-	}
-	for(var i = 0; i < nPH.length; i++){
-		newsPostHeadlines[i] = nPH[i].childNodes[0].nodeValue;
-		newsPostSubHeadings[i] = nPSH[i].childNodes[0].nodeValue;
-		newsPostMainImages[i] = nPMI[i].childNodes[0].nodeValue;
-		newsPostSecColors[i] = nPSC[i].childNodes[0].nodeValue;
-		dots[i].style.backgroundColor = newsPostSecColors[i];
-		newsPostColors[i] = nPC[i].childNodes[0].nodeValue;
-	}
-	document.getElementById("mainNewsImageFader").src = newsPostMainImages[currentHomeSlide];	
-	showHomeSlide();
-	
-	homeSlideTimer = setInterval(homeSlideUp, homeSlideInterval);
-	homeProgressTimer = setInterval(progressBar, progressBarInterval);
+function loadXMLContent(){
+	dots = $(".dot");
+	if($("mainImage-slideshow")){
+		$.get("xml/newsPosts.xml", function(data){
+			var newsPost = $(data).find("newsPosts").find("newsPost");
+			for(var i = 0; i < 3;i++){
+				newsPostHeadlines[i] = $(newsPost[i]).find("headline").text();
+				newsPostSubHeadings[i] = $(newsPost[i]).find("subheading").text();
+				newsPostMainImages[i] = $(newsPost[i]).find("mainImage").text();
+				newsPostColors[i] = $(newsPost[i]).find("mainColor").text();
+				newsPostSecColors[i] = $(newsPost[i]).find("secondaryColor").text();
+				$(dots[i]).css("backgroundColor", newsPostSecColors[i]);				
+			}
+			showHomeSlide();
+			$("#imgText").css({"opacity":"1", "transition":".3s"});
+			$("#imgTextSub").css({"opacity":"1","transition":".3s"});
+		}, "XML");
+		$("mainImageSlide").on("swiperight",(function(e){
+			homeSlideUp();
+		}));
+		$("mainImageSlide").on("swipeleft",(function(e){
+			homeSlideDown();
+		}));
+		homeSlideTimer = setInterval(homeSlideUp, homeSlideInterval);
+		homeProgressTimer = setInterval(progressBar, progressBarInterval);
+	}			
 }
 
 // Progress bar showing time until next slideshow content
@@ -187,56 +168,19 @@ function openGamePopup(buttonTarget)
 		// Insert Popup markup into page
 		$("main").prepend("<div id='popupWrapper'><button id='popupCloseView'>X</button><iframe id='popupContent'></iframe><div id='popupBackground'></div></div>");
 		// popup window
-		eventListener(document.getElementById("popupWrapper"),"click",closePopupWindow);
+		eventListener(document.getElementById("popupCloseView"),"click",closePopupWindow);
+		eventListener(document.getElementById("popupBackground"),"click",closePopupWindow);
 		popupLoaded = true;	
 	}
 	var pageToOpen = buttonTarget;
-	// creating jquery objects
-	var wrapper = $("#popupWrapper");
-	var fader = $("#popupFader");
-	var content = $("#popupFaderContent");
-	var closeButton = $("#popupCloseView");
-	/*
-	// check to see if the window is hidden off screen
-	if(content.css("top") != "15%"){
-		// Reset the offscreen positions for the css transition
-		closeButton.css("top", "-100%");
-		content.css("top", "-100%");
-		// Move the window in to the screen
-		setTimeout(function(){
-			fader.css("opacity", ".7");
-			content.css("top", "15%");
-			closeButton.css("top", "13%");
-		},10);
-		// show the window
-		wrapper.show();	
-		// load the html page in the popup iframe based on the
-		// id of the button that was clicked
-		// (button ids are paths to their respective html files)
-				
-	}*/
-	content.slideDown("slow");
-	content.attr("src",pageToOpen);
+	$("#popupContent").attr("src",pageToOpen);
+	$("#popupWrapper").fadeIn();
+	$("body").css({"overflow":"hidden","margin-right":"1%"});
 }
 
 function closePopupWindow() {
-	var popupWrapper = $("popupWrapper");
-	var popupFader = $("popupBackground");
-	var popupContent = $("popupContent");
-	var popupCloseButton = $("popupCloseView");
-	if(popupContent.css("top") != "-100%"){
-		popupContent.css("top","15%");
-		popupCloseButton.css("top","13%");
-		setTimeout(function(){
-			popupFader.css("opacity", "0");
-			popupContent.css("top","-100%");
-			popupCloseButton.css("top","-100%");
-		},10);
-		setTimeout(function(){
-			popupWrapper.css("display", "none");	
-			popupContent.attr("src","");
-		},200);
-	}
+	$("#popupWrapper").fadeOut();
+	$("body").css({"overflow":"auto","margin":"auto"});
 }
 
 //}
@@ -245,15 +189,15 @@ function closePopupWindow() {
 // Opens and closes the mobile menu when called
 function openMobileMenu(){
 	mobileMenuOpen = !mobileMenuOpen;
-	var menuItems = document.getElementById("menu-items");
-	var dropdownButton = (document.getElementById("dropdownMenu")) ? document.getElementById("dropdownMenu") : document.getElementById("dropdownMenu-open");
 	if(mobileMenuOpen){
-		menuItems.style.display = "block";
-		dropdownButton.id = "dropdownMenu-open";
+		$("#menu-items").slideDown();
+		$("#dropdownMenu").id("dropdownMenu-open");
+		$("body").css({"overflow":"hidden","margin-right":"1%"});
 		
 	} else {
-		menuItems.style.display = "none";
-		dropdownButton.id = "dropdownMenu";
+		$("#menu-items").slideUp();
+		$("#dropdownMenu").id("dropdownMenu");
+		$("body").css({"overflow":"auto","margin":"auto"});
 	}
 }
 // if the screen was resized but the mobile menu is still open, close it
@@ -288,6 +232,8 @@ function pageStart(){
 	}
 	*/
 	
+	loadXMLContent();
+	
 	// make all text inputs IE8 compatible
 	if (document.querySelectorAll("input[type=text]")) {
 		var textInputs = document.querySelectorAll("input[type=text]");
@@ -308,8 +254,8 @@ function pageStart(){
 // Create listeners, called from pageStart()
 function createEventListeners(){
 	// Pop-up buttons	
-	if (document.getElementsByClassName("home-item")){
-		var gameButtons = document.getElementsByClassName("home-item");
+	if (document.getElementsByClassName("block-item")){
+		var gameButtons = document.getElementsByClassName("block-item");
 		for (var i = 0; i < gameButtons.length; i++){
 			eventListener(gameButtons[i],"click",function(){openGamePopupFromButton(this);});
 		}
