@@ -8,27 +8,27 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<title>MWGD | Games</title>
-		<link rel="stylesheet" href="css/mwgdStylesheet.css" />		
+		<link rel="stylesheet" href="css/mwgdStylesheet.css" />
 		<script src="scripts/modernizr.custom.05819.js"></script>
 		<script src="scripts/modernizr.custom.65897.js"></script>
 	</head>
-	
+
 	<body id="page_ourGames">
 		<div class="pageWrapper">
 			<header>
-				<h1 class="structureHead">MostWanted GD Home Page</h1>	
-				<h2 class="structureHead">MWGD Navigation</h2>				
-				<div id="nav"></div>				
+				<h1 class="structureHead">MostWanted GD Home Page</h1>
+				<h2 class="structureHead">MWGD Navigation</h2>
+				<div id="nav"></div>
 			</header>
 			<div id="popupWrapper">
 				<button id="closeView">X</button>
 				<iframe id="faderContent"></iframe>
 				<div id="fader"></div>
-			</div>				
-			<main>					
+			</div>
+			<main>
 				<form id="birthDateCheck">
 					<div id="yearsInput">
-						<span>Enter your age</span>							
+						<span>Enter your age</span>
 						<div id="inputLine">
 							<button type="button" id="age-minus">-</button>
 							<input type="number" size="2" min="1" max="99" value="1" id="input-age"/>
@@ -39,22 +39,27 @@
 				</form>
 				<div id="birthdayResponse"></div>
 				<div id="gamesWindow" style="display:none;"> <!--Inline style used to prevent this from showing before the age check-->
-					<section class="home-list">
-						<div class="game-mature" style="display:none;"><button class="home-item" id="games/pages/template.html"><div class="imageTint"></div><img src="games/current/cogsAndCowboysHome.jpg" alt="Game Image"/><h4><span>Cogs and Cowboys</span></h4><span class="home-item-platform"><span class="home-item-title">Cogs and Cowboys</span> - SteamVR/HTC Vive</span></button></div>
-						<button class="home-item" name="btw.html"><div class="imageTint"></div><img src="games/current/busterTheWizard.jpg" alt="Game Image"/><h4><span>Buster the Wizard</span></h4><span class="home-item-platform"><span class="home-item-title">Buster the Wizard</span> - Nintendo Switch</span></button>
+					<section class="block-list">
+						<div class="mature"><button class="block-item" id="games/CogsAndCowboys/home.html"><img src="games/CogsAndCowboys/cogsAndCowboysHome.jpg" alt="Game Image"/><span class="block-item-title-main">Cogs and Cowboys</span><span class="block-item-subtext"><span class="block-item-title">Cogs and Cowboys</span><span class="block-item-platform"> - SteamVR/HTC Vive</span></span></button></div>
+						<button class="block-item" id="games/BusterTheWizard/busterTheWizard.html"><img src="games/BusterTheWizard/busterTheWizard.jpg" alt="Game Image"/><span class="block-item-title-main">Buster The Wizard</span><span class="block-item-subtext"><span class="block-item-title">Buster The Wizard</span><span class="block-item-platform"> - Switch, Android, Steam</span></span></button>
+						<button class="block-item" id="https://play.google.com/store/apps/details?id=com.mwgd.vortaSprinter"><img src="games/VortaSprinter/vortaSprinter.jpg" alt="Game Image"/><span class="block-item-title-main">VortaSprinter</span><span class="block-item-subtext"><span class="block-item-title">VortaSprinter</span><span class="block-item-platform">- Android</span></span></button>
+						<button class="block-item" id="https://play.google.com/store/apps/details?id=com.mwgd.tfs"><img src="games/TableFlippingSimulator/tableFlippingSimulator.jpg" alt="Game Image"/><span class="block-item-title-main">Table Flipping Simulator</span><span class="block-item-subtext"><span class="block-item-title">Table Flipping Simulator</span><span class="block-item-platform"> - Android</span></span></button>
+						<button class="block-item" id="https://play.google.com/store/apps/details?id=com.mwgd.battelinesww2arcade"><img src="games/BattlelinesWW2Arcade/battlelines.jpg" alt="Game Image"/><span class="block-item-title-main">Battlelines: WW2 Arcade</span><span class="block-item-subtext"><span class="block-item-title">Battlelines: WW2 Arcade</span><span class="block-item-platform"> - Android</span></span></button>
+						<button class="block-item" id="https://play.google.com/store/apps/details?id=com.MWGD.Exiled"><img src="games/Exiled/exiled.jpg" alt="Game Image"/><span class="block-item-title-main">Exiled</span><span class="block-item-subtext"><span class="block-item-title">Exiled</span><span class="block-item-platform"> - Android</span></span></button>
+						<button class="block-item" id="https://play.google.com/store/apps/details?id=com.mwgd.solarForge"><img src="games/SolarForge/solarForge.jpg" alt="Game Image"/><span class="block-item-title-main">Solar Forge</span><span class="block-item-subtext"><span class="block-item-title">Solar Forge</span><span class="block-item-platform"> - Android</span></span></button>
 					</section>
 				</div>
 			</main>
 		</div>
 		<footer>
-			<div id="footerContent"></div>			
-		</footer>		
+			<div id="footerContent"></div>
+		</footer>
 		<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			  crossorigin="anonymous"></script>		
+			  crossorigin="anonymous"></script>
 		<script src="scripts/mwgdScript.js"></script>
-		<script src="pageScripts/gamesPage.js"></script>
+		<script src="scripts/gamesPage.js"></script>
 		<!-- Start of HubSpot Embed Code -->
 		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5818865.js"></script>
 		<!-- End of HubSpot Embed Code -->

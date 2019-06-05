@@ -39,7 +39,7 @@ header{
 	top:0;
 	z-index:50;
 }
-#logo{	
+#logo{
 	position:absolute;
 	left:1%;
 	top:.1em;
@@ -154,7 +154,7 @@ main{
 }
 #popupWrapper {
 	display:none;
-	position:absolute;
+	position:66;
 	top:0;
 	left:0;
 	right:0;
@@ -170,8 +170,9 @@ main{
 	width:100%;
 	min-height:100%;
 	background-color:black;
-	opacity:.7;
+	opacity:.9;
 	z-index:46;
+	display:none;
 }
 #popupContent {
 	position:fixed;
@@ -181,10 +182,11 @@ main{
 	right:15%;
 	top:7%;
 	height:86%;
-	border-radius:1em;	
+	border-radius:1em;
 	display:block;
 	margin:auto;
 	z-index:47;
+	border:0;
 }
 #popupBody {
 	background: radial-gradient(#333333, #111111);
@@ -231,7 +233,7 @@ main{
 }
 .sectionHeader{
 	display:block;
-	margin:20px auto;
+	margin:1em auto;
 	text-align:center;
 	padding:1em;
 }
@@ -254,11 +256,10 @@ main{
 /*Slide Show*/
 #mainImage-slideshow{
 	width:100%;
-	margin:auto;
-	margin:0 auto 0 auto;
-	background-color: black;
+	margin:auto;666
+	background-color: white;
 	transition: background-color .5s;
-	display:block;	
+	display:block;
 	box-shadow:0px 5px 20px grey;
 }
 #mainImagesContainer{
@@ -304,7 +305,6 @@ main{
 #imgText{
 	width:96%;
 	color:white;
-	font:bold;
 	font-size: 2em;
 	padding-top:10px;
 	opacity:0;
@@ -312,7 +312,6 @@ main{
 #imgTextSub{
 	width:100%;
 	color:white;
-	font:bold;
 	font-size: 1.2em;
 	padding-top:5px;
 	min-height:50px;
@@ -397,17 +396,18 @@ main{
 .block-item{
 	background-color:#000000;
 	display:inline-block;
-	width:400px;
-	height: 267px;
-	padding:5px;
-	margin:5px auto 5px auto;
+	width:30em;
+	height: 20em;
+	margin:1em 1em;
 	position:relative;
 	border:none;
 	transition:.3s;
+	border-radius: 2em;
+	overflow:hidden;
+	padding:0;
 }
 .block-item .block-item-title-main{
 	color:white;
-	font-weight:bold;
 	font-size:2.5em;
 	text-align:center;
 	opacity:0;
@@ -418,7 +418,7 @@ main{
 }
 .block-item .block-item-title-main {
 	color:white;
-	font:bold;
+	font-weight:bold;
 	position:absolute;
 	left:50%;
 	top:50%;
@@ -427,25 +427,27 @@ main{
 .block-item h5{
 	color:white;
 }
-.block-item-platform{
-	width:96%;
-	color:white;
-	font:bold;
-	background: rgb (0,0,0);
+.block-item-subtext{
+	width:100%;
 	background: rgba(0,0,0,0.7);
-	padding: 5px;
 	position:absolute;
 	bottom:0%;
-	left:1%;
-	font-size:1em;
+	left:0;
+	padding:.5em 1em;
 	text-align:left;
+	color:white;
 	transition:.2s;
 	opacity:1;
 }
+.block-item-platform{
+	font-weight:normal;
+	font-size:.9em;
+}
 .block-item-title {
 	font-weight:bold;
+	font-size:1em;
 }
-.block-item:hover .block-item-platform {
+.block-item:hover .block-item-subtext {
 	opacity:0;
 	bottom:-5%;
 }
@@ -512,15 +514,15 @@ main{
 	min-height:400px;
 	margin:5vw auto 0 auto;
 	background-color:#222222;
-	background: linear-gradient(#111111, #444444); 
-	border-radius:1vw;	
+	background: linear-gradient(#111111, #444444);
+	border-radius:1vw;
 }
 #birthdayResponse {
 	background-color:#ccaaaa;
 	font-size:1.5em;
 	color:white;
 	text-align:center;
-	display:none;	
+	display:none;
 	margin:10px auto;
 	padding:10px;
 }
@@ -592,9 +594,17 @@ main{
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-	
+
 }
 /***************Responsiveness****************/
+/* Desktop */
+@media screen and (min-width:1200px){
+	#popupContent{
+		width:50%;
+		left:25%;
+		right:25%;
+	}
+}
 /* Tablet*/
 @media screen and (min-width:700px) and (max-width:1200px){
 	#menu-primary {
@@ -610,29 +620,33 @@ main{
 	.block-list {
 		width:100%;
 	}
+	.block-item{
+		width:20em;
+		height:13.35em;
+	}
+	#imgTextContainer{
+		width:70%;
+	}
 }
 /*Phone screen*/
 @media screen and (max-width: 700px) {
 	#popupContent{
-		width:96%;
+		width:95%;
 		left:2%;
-		right:2%;
 	}
 	#popupCloseView{
 		right:1%;
 	}
 	#mainImage-slideshow {
-		min-height:60vw;
-		margin-bottom:30vw;
+		min-height:15em;
 	}
 	#mainImagesContainer {
 		height:100%;
 		width:100%;
 	}
 	#imgTextBG {
-		width:96%;
 		margin:auto;
-		padding:none;
+		padding:0;
 		height:30%
 	}
 	#imgTextContainer {
@@ -642,12 +656,15 @@ main{
 		left:0;
 	}
 	#imgText {
-		font-size:1.5em;
-		padding:5%;
+		font-size:1.2em;
 		top:-10%;
+		margin:auto;
 	}
 	#imgTextSub {
-		display:none;
+		font-size:1em;
+		margin:auto;
+		padding-top:.3em;
+		min-height: 0em;
 	}
 	.block-list {
 		width:100%;
@@ -692,7 +709,7 @@ main{
 		margin:auto;
 		transition:.2s;
 		right:7%;
-		
+
 	}
 	#menu-items li a{
 		padding: 1.25em 1.5em 1.25em 1.5em;
@@ -727,8 +744,7 @@ main{
 		height:5%;
 		position:absolute;
 		bottom:1%;
-		left:25%;
-		right:20%;
+		margin:auto;
 	}
 	.dot{
 		cursor:pointer;

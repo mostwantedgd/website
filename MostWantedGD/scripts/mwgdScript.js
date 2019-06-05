@@ -1,5 +1,5 @@
 /* MostWantedGD
- * 
+ *
  * MAIN SCRIPT
  *
  *
@@ -29,7 +29,6 @@ $(function() {
               $(this).addClass("active");
          });
     }
-
     setTimeout(function() {
         activeNav();
 		eventListener(document.getElementById("dropdownMenu"),"click",openMobileMenu);
@@ -58,9 +57,8 @@ var homeSlideTimer;
 var progressTimer;
 var dots;
 
-function loadXMLContent(){
-	dots = $(".dot");
-	if($("mainImage-slideshow")){
+function loadNewsSlideShowXML(){
+    dots = $(".dot");
 		$.get("xml/newsPosts.xml", function(data){
 			var newsPost = $(data).find("newsPosts").find("newsPost");
 			for(var i = 0; i < 3;i++){
@@ -69,7 +67,7 @@ function loadXMLContent(){
 				newsPostMainImages[i] = $(newsPost[i]).find("mainImage").text();
 				newsPostColors[i] = $(newsPost[i]).find("mainColor").text();
 				newsPostSecColors[i] = $(newsPost[i]).find("secondaryColor").text();
-				$(dots[i]).css("backgroundColor", newsPostSecColors[i]);				
+				$(dots[i]).css("backgroundColor", newsPostSecColors[i]);
 			}
 			showHomeSlide();
 			$("#imgText").css({"opacity":"1", "transition":".3s"});
@@ -83,13 +81,12 @@ function loadXMLContent(){
 		}));
 		homeSlideTimer = setInterval(homeSlideUp, homeSlideInterval);
 		homeProgressTimer = setInterval(progressBar, progressBarInterval);
-	}			
 }
 
 // Progress bar showing time until next slideshow content
 function progressBar(){
 	progressBarFill += (progressBarInterval / homeSlideInterval);
-	document.getElementById("ipb_fill").style.width = (progressBarFill * 100) + "%"; 
+	document.getElementById("ipb_fill").style.width = (progressBarFill * 100) + "%";
 	if(progressBarFill > 1){
 		progressBarFill = 0;
 	}
@@ -106,7 +103,7 @@ function homeSlideUp(){
 }
 
 // Forces slideshow to the previous slide
-function homeSlideDown(){	
+function homeSlideDown(){
 	currentHomeSlide--;
 	clearInterval(homeSlideTimer);
 	clearInterval(homeProgressTimer);
@@ -137,9 +134,9 @@ function showHomeSlide(){
 	}
 	imageFader.stop();
 	imageFader.css({"display":"block","opacity":"100"});
-	$("#mainNewsImage").attr("src", newsPostMainImages[currentHomeSlide]);	
+	$("#mainNewsImage").attr("src", newsPostMainImages[currentHomeSlide]);
 	$("#mainImage-slideshow").css({"backgroundColor": newsPostColors[currentHomeSlide], "transition":".3s"});
-	$("#imgNumberText").html((currentHomeSlide + 1) + "/" + newsPostHeadlines.length);	
+	$("#imgNumberText").html((currentHomeSlide + 1) + "/" + newsPostHeadlines.length);
 	$("#imgText").html(newsPostHeadlines[currentHomeSlide]);
 	$("#imgTextSub").html(newsPostSubHeadings[currentHomeSlide]);
 	for(var i = 0; i < dots.length; i++){
@@ -155,31 +152,38 @@ function showHomeSlide(){
 
 //{Pop up window
 var popupLoaded = false;
-// Called by buttons to open a window. The button's ID is the their target path for the window
-function openGamePopupFromButton(clickedButton){
-	// button ids are paths to their respective html files
-	openGamePopup(clickedButton.id);
+// Called by buttons to open a window. The button's ID is the their target path
+function openButtonLink(clickedButton){
+  var link = clickedButton.id.toString();
+  if(link.includes("http") || link.includes("https")){
+    window.open(link,"_blank");
+  }
+  else{
+    openGamePopup(clickedButton.id);
+   }
 }
 
 // Opens a popup window given a path
 function openGamePopup(buttonTarget)
-{	
+{
 	if(!popupLoaded){
 		// Insert Popup markup into page
-		$("main").prepend("<div id='popupWrapper'><button id='popupCloseView'>X</button><iframe id='popupContent'></iframe><div id='popupBackground'></div></div>");
+		$("main").prepend("<div id='popupWrapper'><div id='popupRelative' style='position:relative;'><button id='popupCloseView'>X</button><iframe id='popupContent'></iframe></div><div id='popupBackground'></div></div>");
 		// popup window
 		eventListener(document.getElementById("popupCloseView"),"click",closePopupWindow);
 		eventListener(document.getElementById("popupBackground"),"click",closePopupWindow);
-		popupLoaded = true;	
+		popupLoaded = true;
 	}
 	var pageToOpen = buttonTarget;
 	$("#popupContent").attr("src",pageToOpen);
-	$("#popupWrapper").fadeIn();
+	$("#popupWrapper").css("display","block");
+  $("#popupBackground").fadeIn();
 	$("body").css({"overflow":"hidden","margin-right":"1%"});
 }
 
 function closePopupWindow() {
-	$("#popupWrapper").fadeOut();
+	$("#popupWrapper").css("display","none");
+  $("#popupBackground").fadeOut();
 	$("body").css({"overflow":"auto","margin":"auto"});
 }
 
@@ -193,7 +197,7 @@ function openMobileMenu(){
 		$("#menu-items").slideDown();
 		$("#dropdownMenu").id("dropdownMenu-open");
 		$("body").css({"overflow":"hidden","margin-right":"1%"});
-		
+
 	} else {
 		$("#menu-items").slideUp();
 		$("#dropdownMenu").id("dropdownMenu");
@@ -209,7 +213,7 @@ function checkMobileMenu(){
 		if(mobileMenuOpen) {
 			dropdownButton.id = "dropdownMenu";
 			mobileMenuOpen = false;
-		} 
+		}
 		menuItems.style.display = "block";
 	} else if (!mobileMenuOpen) {
 		dropdownButton.id = "dropdownMenu";
@@ -220,20 +224,21 @@ function checkMobileMenu(){
 
 // Page Load
 // Things to do when the page loads
-function pageStart(){	
-	
+function pageStart(){
+
 	/* Welcome popup Currently disabled because of HubSpot popup
 	// check if this is a new user
 	if (!sessionStorage.getItem('returnUser')){
 		// they are new, so set session storage so they are treated as returning
 		sessionStorage.setItem('returnUser', 'true');
-		// since they are new, show them a popup		
+		// since they are new, show them a popup
 		setTimeout(function() {openGamePopup("games/pages/template.html");}, 5000);
 	}
 	*/
-	
-	loadXMLContent();
-	
+  if($("#mainImage-slideshow").exists()){
+	   loadNewsSlideShowXML();
+   }
+
 	// make all text inputs IE8 compatible
 	if (document.querySelectorAll("input[type=text]")) {
 		var textInputs = document.querySelectorAll("input[type=text]");
@@ -253,11 +258,11 @@ function pageStart(){
 
 // Create listeners, called from pageStart()
 function createEventListeners(){
-	// Pop-up buttons	
+	// Pop-up buttons
 	if (document.getElementsByClassName("block-item")){
 		var gameButtons = document.getElementsByClassName("block-item");
 		for (var i = 0; i < gameButtons.length; i++){
-			eventListener(gameButtons[i],"click",function(){openGamePopupFromButton(this);});
+			eventListener(gameButtons[i],"click",function(){openButtonLink(this);});
 		}
 	}
 }
@@ -293,6 +298,7 @@ function zeroPlaceholder(target) {
 	}
 }
 
+jQuery.fn.exists = function(){ return this.length > 0; }
 // creates an event listener that is IE8 compatible if necessary
 // target = attach listener to, evt = event to listen for, funct = function to call
 function eventListener(target,evt,funct){
@@ -316,5 +322,4 @@ if(window.addEventListener){
 	window.attachEvent("onload", pageStart, false);
 	window.attachEvent("onresize", checkMobileMenu);
 	addEvtLst = false;
-}	
-	
+}

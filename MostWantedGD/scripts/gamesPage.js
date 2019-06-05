@@ -1,5 +1,5 @@
 /* MostWantedGD
- * 
+ *
  * MAIN SCRIPT
  *
  *
@@ -12,9 +12,9 @@
 var age;
 var ageCheck = false;
 // Checks age input using buttons or direct text
-function checkAge(){	
+function checkAge(){
 	(age.value > 99) ? age.value = 99 : null;
-	(age.value < 1) ? age.value = 1 : null;	
+	(age.value < 1) ? age.value = 1 : null;
 }
 function increaseAge(){
 	age.value++;
@@ -31,7 +31,7 @@ function confirmAge(evt){
 	var gamesWindow = document.getElementById("gamesWindow");
 	// Make sure this only happens once unless the page is reloaded
 	if(!ageCheck){
-		var matureGames = document.getElementsByClassName("game-mature");
+		var matureGames = document.getElementsByClassName("mature");
 		if(isNaN(age.value)){
 			dateCheckWindow.style.display = "none";
 			dateResponse.innerHTML = "<div id='birthdayFail'><p>Please enter a number.</p></div>";
@@ -85,4 +85,3 @@ function gpSetup() {
 
 //mwgdScript.js - eventListener(target, event, function) creates modern and IE8 event listeners
 eventListener(window, "load", gpSetup);
-	

@@ -1,0 +1,63 @@
+/* MostWantedGD
+ *
+ * POPUP CSS
+ *
+ * This is shown in an iframe
+ *
+ * Author: Nick Flowers
+ * Date: 4/24/18
+ */
+#popupHeaderImage{
+	width:100%;
+	position:fixed;
+	z-index:4;
+	top:0;
+}
+#popupHeader{
+	width: 100%;
+	font-size: 5em;
+	position: relative;
+	z-index: 10;
+	color: white;
+	margin: -1em auto auto auto;
+	text-align: center;
+	text-shadow: 0 1px 10px #000;
+	top:3.4em;
+}
+#popupHeaderElements li{
+	display:inline-block;
+}
+#popupVideo {
+	display:block;
+	margin:auto;
+	width:70vw;
+	height:calc(70vw * (9/16));
+}
+#popupImageSpacer{
+	position: absolute;
+  z-index: 5;
+  height: 9em;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), rgb(0, 0, 0));
+  width: 100%;
+  top: 8em;
+	border-bottom: 4em solid black;
+}
+#popupSubheading{
+	font-size:2em;
+	text-align:center;
+	margin:auto;
+	position:relative;
+	z-index:10;
+	color: white;
+	padding-top: .6em;
+	top:8.5em;
+}
+#popupContentWrapper{
+	width: 90%;
+	margin: auto;
+	position: relative;
+	top: 38%
+}
+#popupHook{
+	width:90%;
+}
